@@ -47,10 +47,12 @@ public class GameManager {
                 game.setInfo(info);
 
                 info.getCommandInfo().getCommands().forEach(rawCommand -> {
-                    try {
-                        Main.getInstance().getCommandRegistry().register(new GameCommand(rawCommand.getName(), (CommandExecutor) loader.loadClass(rawCommand.getPath()).newInstance(), new GameCommand[0], rawCommand.getAliases()));
-                    } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-                        e.printStackTrace();
+                    if (!rawCommand.isChild()) {
+                        try {
+                            Main.getInstance().getCommandRegistry().register(new GameCommand(rawCommand.getName(), (CommandExecutor) loader.loadClass(rawCommand.getPath()).newInstance(), rawCommand.getChildren(loader), rawCommand.getAliases()));
+                        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
 

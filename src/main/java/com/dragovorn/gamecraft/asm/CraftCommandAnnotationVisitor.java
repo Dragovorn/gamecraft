@@ -3,12 +3,13 @@ package com.dragovorn.gamecraft.asm;
 import com.dragovorn.gamecraft.command.RawCommand;
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
 public class CraftCommandAnnotationVisitor extends AnnotationVisitor {
 
     private RawCommand command;
 
-    public CraftCommandAnnotationVisitor(RawCommand command) {
+    CraftCommandAnnotationVisitor(RawCommand command) {
         super(Opcodes.ASM6);
 
         this.command = command;
@@ -48,6 +49,9 @@ public class CraftCommandAnnotationVisitor extends AnnotationVisitor {
             switch (this.name) {
                 case "aliases":
                     command.addAlias((String) value);
+                    break;
+                case "children":
+                    command.addChild(((Type) value).getClassName());
                     break;
             }
         }

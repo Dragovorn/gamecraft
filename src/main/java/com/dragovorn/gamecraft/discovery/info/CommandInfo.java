@@ -12,15 +12,25 @@ public class CommandInfo {
     public static class Builder {
         private List<RawCommand> commands;
 
-        public Builder() {
+        Builder() {
             this.commands = new ArrayList<>();
         }
 
         public RawCommand insertNew(String name) {
-            RawCommand command = new RawCommand(name);
+            RawCommand command = new RawCommand(name, this);
             this.commands.add(command);
 
             return command;
+        }
+
+        public RawCommand findCommand(String path) {
+            for (RawCommand command : this.commands) {
+                if (command.getPath().equals(path)) {
+                    return command;
+                }
+            }
+
+            return null;
         }
 
         CommandInfo build() {
