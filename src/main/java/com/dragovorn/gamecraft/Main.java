@@ -1,7 +1,10 @@
 package com.dragovorn.gamecraft;
 
+import com.dragovorn.gamecraft.command.GameCommandRegistry;
 import com.dragovorn.gamecraft.discovery.GameManager;
+import com.dragovorn.gamecraft.player.GamePlayer;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -9,6 +12,8 @@ import java.io.File;
 public class Main extends JavaPlugin {
 
     private static Main instance;
+
+    private GameCommandRegistry commandRegistry;
 
     private GameManager gameManager;
 
@@ -22,6 +27,7 @@ public class Main extends JavaPlugin {
         instance = this;
         this.gameDir = new File(Bukkit.getWorldContainer(), "games");
         this.gameManager = new GameManager();
+        this.commandRegistry = new GameCommandRegistry();
 
         if (this.gameDir.mkdirs()) {
             getLogger().warning("No games directory found, Making one!");
@@ -44,8 +50,16 @@ public class Main extends JavaPlugin {
         this.gameManager.disableGames();
     }
 
+    public GameCommandRegistry getCommandRegistry() {
+        return this.commandRegistry;
+    }
+
     public File getGameDir() {
         return this.gameDir;
+    }
+
+    public static GamePlayer getPlayer(Player player) {
+        return null; // Stubbed out until i do player shit
     }
 
     public static Main getInstance() {
