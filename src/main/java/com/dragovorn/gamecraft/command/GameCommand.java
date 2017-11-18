@@ -19,7 +19,7 @@ public final class GameCommand {
 
     private int minimumArgs;
 
-    protected GameCommand(String name, CommandExecutor executor) {
+    public GameCommand(String name, CommandExecutor executor) {
         this.name = name;
         this.executor = executor;
         this.description = "";

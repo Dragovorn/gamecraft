@@ -2,6 +2,9 @@ package com.dragovorn.gamecraft.discovery;
 
 import com.dragovorn.gamecraft.Main;
 import com.dragovorn.gamecraft.asm.GameClassVisitor;
+import com.dragovorn.gamecraft.command.CommandExecutor;
+import com.dragovorn.gamecraft.command.GameCommand;
+import com.dragovorn.gamecraft.discovery.info.GameInfo;
 import org.objectweb.asm.ClassReader;
 
 import java.io.File;
@@ -42,6 +45,15 @@ public class GameManager {
                 Class<?> main = loader.loadClass(info.getMain());
                 Game game = (Game) main.getDeclaredConstructor().newInstance();
                 game.setInfo(info);
+
+                info.getCommandInfo().getCommands().forEach(rawCommand -> {
+                    try {
+                        Main.getInstance().getCommandRegistry().register(new GameCommand(rawCommand.getName(), (CommandExecutor) loader.loadClass(rawCommand.getPath()).newInstance()));
+                    } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                });
+
                 this.games.add(game);
             } catch (MalformedURLException | InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException | ClassNotFoundException e) {
                 e.printStackTrace();

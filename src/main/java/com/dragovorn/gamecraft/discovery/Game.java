@@ -1,5 +1,6 @@
 package com.dragovorn.gamecraft.discovery;
 
+import com.dragovorn.gamecraft.discovery.info.GameInfo;
 import com.dragovorn.gamecraft.log.GameLogger;
 
 import java.util.logging.Logger;

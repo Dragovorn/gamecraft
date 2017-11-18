@@ -1,6 +1,6 @@
 package com.dragovorn.gamecraft.asm;
 
-import com.dragovorn.gamecraft.discovery.GameInfo;
+import com.dragovorn.gamecraft.discovery.info.GameInfo;
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.Opcodes;
 
@@ -8,7 +8,7 @@ public class CraftGameAnnotationVisitor extends AnnotationVisitor {
 
     private GameInfo.Builder builder;
 
-    public CraftGameAnnotationVisitor(GameInfo.Builder builder) {
+    CraftGameAnnotationVisitor(GameInfo.Builder builder) {
         super(Opcodes.ASM6);
 
         this.builder = builder;

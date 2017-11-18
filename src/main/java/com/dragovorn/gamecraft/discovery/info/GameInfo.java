@@ -1,10 +1,12 @@
-package com.dragovorn.gamecraft.discovery;
+package com.dragovorn.gamecraft.discovery.info;
 
 import java.io.File;
 
 public class GameInfo {
 
     private File file;
+
+    private CommandInfo commandInfo;
 
     private String name;
     private String author;
@@ -16,6 +18,8 @@ public class GameInfo {
     public static class Builder {
         private File file;
 
+        private CommandInfo.Builder commandInfo;
+
         private String name;
         private String author;
         private String version;
@@ -23,7 +27,7 @@ public class GameInfo {
         private String supportedVersions;
         private String incompatibleWith;
 
-        Builder(File file) {
+        public Builder(File file) {
             this.file = file;
         }
 
@@ -51,7 +55,15 @@ public class GameInfo {
             this.incompatibleWith = incompatibleWith;
         }
 
-        GameInfo build() {
+        public CommandInfo.Builder getCommandInfo() {
+            return this.commandInfo;
+        }
+
+        public boolean hasMain() {
+            return !this.main.equals("");
+        }
+
+        public GameInfo build() {
             return new GameInfo(this);
         }
     }
@@ -63,6 +75,8 @@ public class GameInfo {
         this.version = builder.version;
         this.main = builder.main;
         this.supportedVersions = builder.supportedVersions;
+        this.incompatibleWith = builder.incompatibleWith;
+        this.commandInfo = builder.commandInfo.build();
     }
 
     public File getFile() {
@@ -91,5 +105,9 @@ public class GameInfo {
 
     public String getIncompatibleWith() {
         return this.incompatibleWith;
+    }
+
+    public CommandInfo getCommandInfo() {
+        return this.commandInfo;
     }
 }
