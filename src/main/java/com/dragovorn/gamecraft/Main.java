@@ -36,12 +36,12 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
+        this.gameManager.enableGames();
     }
 
     @Override
     public void onDisable() {
-
+        this.gameManager.disableGames();
     }
 
     public File getGameDir() {

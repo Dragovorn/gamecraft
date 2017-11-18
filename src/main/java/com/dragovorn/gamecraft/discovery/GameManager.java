@@ -7,6 +7,7 @@ import org.objectweb.asm.ClassReader;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -47,8 +48,36 @@ public class GameManager {
             }
         }
 
+        try {
+            executeMethodOnAllGames(Game.class.getMethod("onLoad"));
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void executeMethodOnAllGames(Method method) {
         for (Game game : this.games) {
-            game.onLoad();
+            try {
+                method.invoke(game);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void enableGames() {
+        try {
+            executeMethodOnAllGames(Game.class.getMethod("onEnable"));
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void disableGames() {
+        try {
+            executeMethodOnAllGames(Game.class.getMethod("onDisable"));
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
         }
     }
 
