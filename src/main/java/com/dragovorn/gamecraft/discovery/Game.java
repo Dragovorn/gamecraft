@@ -6,9 +6,12 @@ import java.util.logging.Logger;
 
 public abstract class Game {
 
+    private GameInfo info;
+
     private Logger logger;
 
-    private Game(GameInfo info) {
+    void setInfo(GameInfo info) {
+        this.info = info;
         this.logger = new GameLogger(info.getName());
     }
 
@@ -21,4 +24,8 @@ public abstract class Game {
     }
 
     public abstract void onEnable();
+
+    public final Logger getLogger() {
+        return this.logger;
+    }
 }

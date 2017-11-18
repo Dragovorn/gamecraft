@@ -1,26 +1,34 @@
 package com.dragovorn.gamecraft.discovery;
 
+import java.io.File;
+
 public class GameInfo {
 
+    private File file;
+
     private String name;
-    private String developer;
+    private String author;
     private String version;
     private String supportedVersions;
 
-    class Builder {
+    public static class Builder {
+        private File file;
+
         private String name;
-        private String developer;
+        private String author;
         private String version;
         private String supportedVersions;
 
-        public Builder() { }
+        Builder(File file) {
+            this.file = file;
+        }
 
         public void setName(String name) {
             this.name = name;
         }
 
-        public void setDeveloper(String developer) {
-            this.developer = developer;
+        public void setAuthor(String author) {
+            this.author = author;
         }
 
         public void setVersion(String version) {
@@ -30,11 +38,16 @@ public class GameInfo {
         public void setSupportedVersions(String supportedVersions) {
             this.supportedVersions = supportedVersions;
         }
+
+        GameInfo build() {
+            return new GameInfo(this.file, this.name, this.author, this.version, this.supportedVersions);
+        }
     }
 
-    private GameInfo(String name, String developer, String version, String supportedVersions) {
+    private GameInfo(File file, String name, String author, String version, String supportedVersions) {
+        this.file = file;
         this.name = name;
-        this.developer = developer;
+        this.author = author;
         this.version = version;
         this.supportedVersions = supportedVersions;
     }
@@ -43,8 +56,8 @@ public class GameInfo {
         return this.name;
     }
 
-    public String getDeveloper() {
-        return this.developer;
+    public String getAuthor() {
+        return this.author;
     }
 
     public String getVersion() {
