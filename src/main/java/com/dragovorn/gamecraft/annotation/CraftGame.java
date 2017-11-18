@@ -10,9 +10,9 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface Game {
+public @interface CraftGame {
     String name();
     String author();
     String version();
-    String supportedVersions();
+    String supportedVersions() default "";
 }
