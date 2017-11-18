@@ -9,7 +9,9 @@ public class GameInfo {
     private String name;
     private String author;
     private String version;
+    private String main;
     private String supportedVersions;
+    private String incompatibleWith;
 
     public static class Builder {
         private File file;
@@ -17,7 +19,9 @@ public class GameInfo {
         private String name;
         private String author;
         private String version;
+        private String main;
         private String supportedVersions;
+        private String incompatibleWith;
 
         Builder(File file) {
             this.file = file;
@@ -35,21 +39,34 @@ public class GameInfo {
             this.version = version;
         }
 
+        public void setMain(String main) {
+            this.main = main;
+        }
+
         public void setSupportedVersions(String supportedVersions) {
             this.supportedVersions = supportedVersions;
         }
 
+        public void setIncompatibleWith(String incompatibleWith) {
+            this.incompatibleWith = incompatibleWith;
+        }
+
         GameInfo build() {
-            return new GameInfo(this.file, this.name, this.author, this.version, this.supportedVersions);
+            return new GameInfo(this);
         }
     }
 
-    private GameInfo(File file, String name, String author, String version, String supportedVersions) {
-        this.file = file;
-        this.name = name;
-        this.author = author;
-        this.version = version;
-        this.supportedVersions = supportedVersions;
+    private GameInfo(Builder builder) {
+        this.file = builder.file;
+        this.name = builder.name;
+        this.author = builder.author;
+        this.version = builder.version;
+        this.main = builder.main;
+        this.supportedVersions = builder.supportedVersions;
+    }
+
+    public File getFile() {
+        return this.file;
     }
 
     public String getName() {
@@ -64,7 +81,15 @@ public class GameInfo {
         return this.version;
     }
 
+    public String getMain() {
+        return this.main;
+    }
+
     public String getSupportedVersions() {
         return this.supportedVersions;
+    }
+
+    public String getIncompatibleWith() {
+        return this.incompatibleWith;
     }
 }

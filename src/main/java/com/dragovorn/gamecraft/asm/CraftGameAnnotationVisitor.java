@@ -29,6 +29,9 @@ public class CraftGameAnnotationVisitor extends AnnotationVisitor {
             case "supportedVersions":
                 this.builder.setSupportedVersions((String) value);
                 break;
+            case "incompatibleWith":
+                this.builder.setIncompatibleWith((String) value);
+                break;
         }
 
         super.visit(name, value);

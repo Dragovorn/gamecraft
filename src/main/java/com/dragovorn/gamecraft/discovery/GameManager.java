@@ -6,6 +6,9 @@ import org.objectweb.asm.ClassReader;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -31,6 +34,21 @@ public class GameManager {
             GameInfo info = loadGameInfo(file);
 
             Main.getInstance().getLogger().info("    Discovered: " + info.getName() + " v" + info.getVersion() + ", By: " + info.getAuthor());
+
+            try {
+                GameLoader loader = new GameLoader(new URL[] {info.getFile().toURI().toURL()});
+
+                Class<?> main = loader.loadClass(info.getMain());
+                Game game = (Game) main.getDeclaredConstructor().newInstance();
+                game.setInfo(info);
+                this.games.add(game);
+            } catch (MalformedURLException | InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        for (Game game : this.games) {
+            game.onLoad();
         }
     }
 

@@ -15,4 +15,5 @@ public @interface CraftGame {
     String author();
     String version();
     String supportedVersions() default "";
+    String incompatibleWith() default "";
 }

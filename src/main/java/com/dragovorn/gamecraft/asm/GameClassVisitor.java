@@ -34,6 +34,7 @@ public class GameClassVisitor extends ClassVisitor {
     public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
         if (desc.equals("L" + StringUtil.formatClassPath(CraftGame.class) + ";")) {
             if (this.extendsGame) {
+                this.builder.setMain(this.name.replaceAll("/", ".")); // ONLY FOR TESTING, NEED TO RETARD PROOF THIS
                 return new CraftGameAnnotationVisitor(this.builder);
             }
         }
