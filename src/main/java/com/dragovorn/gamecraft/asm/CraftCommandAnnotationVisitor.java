@@ -16,6 +16,40 @@ public class CraftCommandAnnotationVisitor extends AnnotationVisitor {
 
     @Override
     public void visit(String name, Object value) {
-        this.command.setName((String) value);
+        switch (name) {
+            case "value":
+                this.command.setName((String) value);
+                break;
+            case "child":
+                this.command.setChild((boolean) value);
+                break;
+        }
+
+        super.visit(name, value);
+    }
+
+    @Override
+    public AnnotationVisitor visitArray(String name) {
+        return new ArrayVisitor(name);
+    }
+
+    private class ArrayVisitor extends AnnotationVisitor {
+
+        private String name;
+
+        private ArrayVisitor(String name) {
+            super(Opcodes.ASM6);
+
+            this.name = name;
+        }
+
+        @Override
+        public void visit(String name, Object value) {
+            switch (this.name) {
+                case "aliases":
+                    command.addAlias((String) value);
+                    break;
+            }
+        }
     }
 }

@@ -3,14 +3,11 @@ package com.dragovorn.gamecraft.command;
 import com.dragovorn.gamecraft.player.GamePlayer;
 import org.bukkit.command.CommandSender;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public final class GameCommand {
 
     private final CommandExecutor executor;
 
-    private final List<GameCommand> children;
+    private final GameCommand[] children;
 
     private final String name;
     private String description;
@@ -19,14 +16,14 @@ public final class GameCommand {
 
     private int minimumArgs;
 
-    public GameCommand(String name, CommandExecutor executor) {
+    public GameCommand(String name, CommandExecutor executor, GameCommand[] children, String[] aliases) {
         this.name = name;
         this.executor = executor;
         this.description = "";
         this.usage = "/" + name;
         this.minimumArgs = 0;
-        this.aliases = new String[0];
-        this.children = new ArrayList<>();
+        this.aliases = aliases;
+        this.children = children;
     }
 
     void execute(GamePlayer player, String label, String[] args) {
@@ -62,6 +59,6 @@ public final class GameCommand {
     }
 
     protected GameCommand[] getChildren() {
-        return this.children.toArray(new GameCommand[this.children.size()]);
+        return this.children;
     }
 }
