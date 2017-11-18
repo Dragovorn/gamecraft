@@ -30,7 +30,7 @@ public class GameCommandExecutor  extends Command implements PluginIdentifiableC
         }
 
         if (sender instanceof Player) {
-            GamePlayer player = Main.getPlayer((Player) sender);
+            GamePlayer player = Main.getInstance().getPlayerManager().getPlayer((Player) sender);
 
             if (!command.hasPermission(player)) {
                 player.sendMessage("");

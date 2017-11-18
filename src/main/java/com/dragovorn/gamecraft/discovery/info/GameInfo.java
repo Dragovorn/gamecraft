@@ -29,6 +29,8 @@ public class GameInfo {
 
         public Builder(File file) {
             this.file = file;
+            this.commandInfo = new CommandInfo.Builder();
+            this.main = "";
         }
 
         public void setName(String name) {

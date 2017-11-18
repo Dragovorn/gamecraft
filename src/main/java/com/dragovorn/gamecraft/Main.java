@@ -2,9 +2,8 @@ package com.dragovorn.gamecraft;
 
 import com.dragovorn.gamecraft.command.GameCommandRegistry;
 import com.dragovorn.gamecraft.discovery.GameManager;
-import com.dragovorn.gamecraft.player.GamePlayer;
+import com.dragovorn.gamecraft.player.PlayerManager;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -14,6 +13,8 @@ public class Main extends JavaPlugin {
     private static Main instance;
 
     private GameCommandRegistry commandRegistry;
+
+    private PlayerManager playerManager;
 
     private GameManager gameManager;
 
@@ -42,6 +43,9 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        this.playerManager = new PlayerManager();
+        Bukkit.getPluginManager().registerEvents(this.playerManager, this);
+
         this.gameManager.enableGames();
     }
 
@@ -58,8 +62,8 @@ public class Main extends JavaPlugin {
         return this.gameDir;
     }
 
-    public static GamePlayer getPlayer(Player player) {
-        return null; // Stubbed out until i do player shit
+    public PlayerManager getPlayerManager() {
+        return this.playerManager;
     }
 
     public static Main getInstance() {
