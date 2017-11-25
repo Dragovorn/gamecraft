@@ -5,6 +5,7 @@ import com.dragovorn.gamecraft.asm.GameClassVisitor;
 import com.dragovorn.gamecraft.command.CommandExecutor;
 import com.dragovorn.gamecraft.command.GameCommand;
 import com.dragovorn.gamecraft.discovery.info.GameInfo;
+import com.google.common.collect.ImmutableList;
 import org.objectweb.asm.ClassReader;
 
 import java.io.File;
@@ -67,6 +68,10 @@ public class GameManager {
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Game> getGames() {
+        return ImmutableList.copyOf(this.games);
     }
 
     private void executeMethodOnAllGames(Method method) {

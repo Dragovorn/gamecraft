@@ -11,7 +11,7 @@ public abstract class Game {
 
     private Logger logger;
 
-    void setInfo(GameInfo info) {
+    final void setInfo(GameInfo info) {
         this.info = info;
         this.logger = new GameLogger(info.getName());
     }
@@ -28,5 +28,9 @@ public abstract class Game {
 
     public final Logger getLogger() {
         return this.logger;
+    }
+
+    public final GameInfo getInfo() {
+        return this.info;
     }
 }
