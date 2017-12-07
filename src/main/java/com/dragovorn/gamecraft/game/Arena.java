@@ -7,4 +7,8 @@ package com.dragovorn.gamecraft.game;
 public class Arena {
 
     private Team[] teams = new Team[]{};
+
+    public Arena() {
+
+    }
 }
