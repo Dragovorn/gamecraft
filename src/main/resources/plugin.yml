@@ -1,5 +1,5 @@
 name: GameCraft
 main: com.dragovorn.gamecraft.Main
 version: ${project.version}
-authors: [Dragovorn]
+authors: [Dragovorn, y0op]
 prefix: GC
