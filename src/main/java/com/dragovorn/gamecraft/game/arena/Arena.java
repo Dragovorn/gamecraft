@@ -1,9 +1,12 @@
 package com.dragovorn.gamecraft.game.arena;
 
 import com.dragovorn.gamecraft.game.Team;
+import com.dragovorn.gamecraft.player.GamePlayer;
 
 import javax.xml.stream.Location;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -29,6 +32,22 @@ public class Arena {
      */
     public Arena(String id) {
         this.id = id;
+
+        ArenaManager.register(this);
+    }
+
+    /**
+     *
+     * Returns all the players in all the teams of the arena.
+     *
+     * @return List of players in arena.
+     */
+    public List<GamePlayer> getPlayers() {
+
+        List<GamePlayer> players = new ArrayList<>();
+        teams.forEach(team -> players.addAll(team.getPlayers()));
+
+        return players;
     }
     
     /**

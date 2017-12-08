@@ -1,7 +1,7 @@
 package com.dragovorn.gamecraft.game.arena;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Cameron
@@ -9,7 +9,7 @@ import java.util.Set;
  */
 public final class ArenaManager {
     
-    private static Set<Arena> arenas = new HashSet<>();
+    private static List<Arena> arenas = new ArrayList<>();
     
     /**
      *
@@ -17,7 +17,7 @@ public final class ArenaManager {
      *
      * @param arena Arena to register
      */
-    public void register(Arena arena) {
+    public static void register(Arena arena) {
         arenas.add(arena);
     }
     
@@ -27,7 +27,17 @@ public final class ArenaManager {
      *
      * @param arena Arena to de-register.
      */
-    public void deregister(Arena arena) {
+    public static void deregister(Arena arena) {
         arenas.remove(arena);
+    }
+
+    /**
+     *
+     * Returns the list managing list of arenas.
+     *
+     * @return List of arenas.
+     */
+    public static List<Arena> get() {
+        return arenas;
     }
 }

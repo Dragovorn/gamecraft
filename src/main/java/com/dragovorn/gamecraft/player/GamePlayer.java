@@ -1,5 +1,7 @@
 package com.dragovorn.gamecraft.player;
 
+import com.dragovorn.gamecraft.game.arena.Arena;
+import com.dragovorn.gamecraft.game.arena.ArenaManager;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -25,6 +27,38 @@ public class GamePlayer {
 
     public UUID getUuid() {
         return uuid;
+    }
+
+    /**
+     *
+     * Returns the arena that the player is currently in.
+     *
+     * <p><strong>If the player is not in an arena the method will return null</strong></p>
+     *
+     * @return Arena player is in.
+     */
+    public Arena getArena() {
+
+        Arena a = null;
+
+        for (Arena arena : ArenaManager.get()) {
+            if (arena.getPlayers().contains(this)) {
+                a = arena;
+            }
+        }
+
+        return a;
+    }
+
+    /**
+     *
+     * Returns a boolean based on if the player is in
+     * an arena.
+     *
+     * @return Arena player is in.
+     */
+    public boolean isInArena() {
+        return this.getArena() == null;
     }
 
     @Override

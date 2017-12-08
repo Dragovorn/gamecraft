@@ -33,6 +33,16 @@ public class Team {
         this.color = color;
         this.name = name;
     }
+
+    /**
+     *
+     * Returns a list of players currently in the team.
+     *
+     * @return List of players in team.
+     */
+    public Set<GamePlayer> getPlayers() {
+        return players;
+    }
     
     /**
      *
