@@ -10,6 +10,7 @@ public class CommandInfo {
     private List<RawCommand> commands;
 
     public static class Builder {
+
         private List<RawCommand> commands;
 
         Builder() {

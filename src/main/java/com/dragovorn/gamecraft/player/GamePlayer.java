@@ -15,8 +15,10 @@ public class GamePlayer {
         this.uuid = player.getUniqueId();
     }
 
-    public void save() {
+    public void save() { }
 
+    public UUID getUUID() {
+        return this.uuid;
     }
 
     public void sendMessage(String message) {

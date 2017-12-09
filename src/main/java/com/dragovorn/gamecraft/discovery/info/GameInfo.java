@@ -8,6 +8,8 @@ public class GameInfo {
 
     private CommandInfo commandInfo;
 
+    private PlayerInfo playerInfo;
+
     private String name;
     private String author;
     private String version;
@@ -16,9 +18,12 @@ public class GameInfo {
     private String incompatibleWith;
 
     public static class Builder {
+
         private File file;
 
         private CommandInfo.Builder commandInfo;
+
+        private PlayerInfo.Builder playerInfo;
 
         private String name;
         private String author;
@@ -61,6 +66,10 @@ public class GameInfo {
             return this.commandInfo;
         }
 
+        public PlayerInfo.Builder getPlayerInfo() {
+            return this.playerInfo;
+        }
+
         public boolean hasMain() {
             return !this.main.equals("");
         }
@@ -79,6 +88,7 @@ public class GameInfo {
         this.supportedVersions = builder.supportedVersions;
         this.incompatibleWith = builder.incompatibleWith;
         this.commandInfo = builder.commandInfo.build();
+        this.playerInfo = builder.playerInfo.build();
     }
 
     public File getFile() {
@@ -111,5 +121,9 @@ public class GameInfo {
 
     public CommandInfo getCommandInfo() {
         return this.commandInfo;
+    }
+
+    public PlayerInfo getPlayerInfo() {
+        return this.playerInfo;
     }
 }
