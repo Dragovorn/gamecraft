@@ -2,6 +2,7 @@ package com.dragovorn.gamecraft.game;
 
 import com.dragovorn.gamecraft.player.GamePlayer;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +17,8 @@ public class Team {
 
     private ChatColor color;
     private String name;
+    
+    private Location spawn;
 
     /**
      *
@@ -29,6 +32,27 @@ public class Team {
 
         this.color = color;
         this.name = name;
+    }
+
+    /**
+     *
+     * Returns a list of players currently in the team.
+     *
+     * @return List of players in team.
+     */
+    public Set<GamePlayer> getPlayers() {
+        return players;
+    }
+    
+    /**
+     *
+     * Sets the passed in location as the spawn point
+     * for the invoked-upon instance of team.
+     *
+     * @param location Location to set spawn to.
+     */
+    public void setSpawn(Location location) {
+        this.spawn = location;
     }
 
     /**
