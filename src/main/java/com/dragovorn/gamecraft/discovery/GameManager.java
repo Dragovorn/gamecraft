@@ -5,6 +5,7 @@ import com.dragovorn.gamecraft.asm.GameClassVisitor;
 import com.dragovorn.gamecraft.command.CommandExecutor;
 import com.dragovorn.gamecraft.command.GameCommand;
 import com.dragovorn.gamecraft.discovery.info.GameInfo;
+import com.dragovorn.gamecraft.player.GamePlayer;
 import com.google.common.collect.ImmutableList;
 import org.objectweb.asm.ClassReader;
 
@@ -46,6 +47,8 @@ public class GameManager {
                 Class<?> main = loader.loadClass(info.getMain());
                 Game game = (Game) main.getDeclaredConstructor().newInstance();
                 game.setInfo(info);
+
+                Main.getInstance().getPlayerManager().setPlayerClass((Class<? extends GamePlayer>) loader.loadClass(info.getPlayerInfo().getPlayerTypePath()));
 
                 info.getCommandInfo().getCommands().forEach(rawCommand -> {
                     if (!rawCommand.isChild()) {

@@ -54,7 +54,7 @@ public class GameClassVisitor extends ClassVisitor {
             }
         } else if (matchesAnnotation(desc, PlayerType.class)) {
             if (this.extendsGamePlayer) {
-
+                this.builder.getPlayerInfo().setPlayerTypePath(this.name);
             }
         }
 
