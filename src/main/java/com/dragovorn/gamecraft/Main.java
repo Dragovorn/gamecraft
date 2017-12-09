@@ -4,6 +4,7 @@ import com.dragovorn.gamecraft.command.GameCommand;
 import com.dragovorn.gamecraft.command.GameCommandRegistry;
 import com.dragovorn.gamecraft.command.executor.GamesCommandExecutor;
 import com.dragovorn.gamecraft.discovery.GameManager;
+import com.dragovorn.gamecraft.game.event.arena.PlayerDeathInArenaEvent;
 import com.dragovorn.gamecraft.player.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -48,6 +49,7 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         this.playerManager = new PlayerManager();
         Bukkit.getPluginManager().registerEvents(this.playerManager, this);
+        Bukkit.getPluginManager().registerEvents(new PlayerDeathInArenaEvent.PlayerDeathInArenaCall(), this);
 
         this.commandRegistry.register(new GameCommand("games", new GamesCommandExecutor(), new GameCommand[0], new String[0]));
 
