@@ -22,9 +22,6 @@ public class Main extends JavaPlugin {
 
     private File gameDir;
 
-    // INJECT DISCOVERER -> DISCOVER GAMES -> DISABLE INCOMPATIBLE GAMES -> CONFIGURE GAMES -> LAUNCH GAMES
-    // DISABLE INCOMPATIBLE GAMES: CHECK THEIR VERSION -> CHECK PROVIDED INCOMPATIBILITIES
-
     @Override
     public void onLoad() {
         instance = this;
@@ -41,6 +38,10 @@ public class Main extends JavaPlugin {
         }
 
         this.gameManager.loadGames();
+
+        if (this.gameManager.getGames().size() > 1) {
+            getLogger().warning("You are using multiple games, this could result in unwanted behavior!");
+        }
     }
 
     @Override
